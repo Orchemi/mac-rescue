@@ -30,11 +30,11 @@ Spotlight에서 Rescue로 검색하거나 Finder에서 앱을 Dock으로 끌어�
 
 소스와 설치기는 mac-rescue 저장소에 둔다. `~/.local/bin`은 원본 보관 장소가 아니라 실행 명령
 설치 위치다. **포맷 전에 변경사항을 원격 저장소에 push해 두어야 한다.** 설치기는 commit/push를 대신하지 않는다.
-원격 저장소: `git@github.com:Orchemi/mac-rescue.git` (비공개).
+원격 저장소: `https://github.com/Orchemi/mac-rescue-public.git` (공개).
 
 1. 새 Mac에 Python 3, Git, Swift 컴파일러가 포함된 Xcode Command Line Tools를 준비한다.
    최초 설치 시 SwiftUI 앱을 로컬에서 빌드하므로 몇 분 걸릴 수 있다.
-2. GitHub 접근 권한을 설정하고 `Orchemi/mac-rescue`를 clone한다. 해당 폴더에서 실행한다.
+2. `https://github.com/Orchemi/mac-rescue-public.git`를 clone한다. 해당 폴더에서 실행한다.
 
 ```sh
 python3 scripts/install-rescue.py

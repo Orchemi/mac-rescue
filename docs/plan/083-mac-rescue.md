@@ -1,6 +1,6 @@
 # 083: Mac 메모리 점검과 독립 원격 복구
 
-소스 정본: https://github.com/Orchemi/mac-rescue
+소스 정본: https://github.com/Orchemi/mac-rescue-public
 
 ## 목표
 
