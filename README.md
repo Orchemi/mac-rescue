@@ -83,3 +83,5 @@ python3 scripts/install-rescue.py
 
 `VERSION`과 `CHANGELOG.md`로 SemVer를 기록하고 Git 태그 `v1.0.0` 형태로 기준점을 남깁니다.
 설치 산출물은 로컬에서 만들며 원격 저장소에는 소스와 검증 절차를 보관합니다.
+
+Claude/Codex 개발 환경과 설치 없는 빌드 검증은 [개발 안내](docs/development.md)를 참고하세요.

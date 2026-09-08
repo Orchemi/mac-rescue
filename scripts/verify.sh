@@ -14,4 +14,5 @@ for path in Path('scripts').glob('*.py'):
     ast.parse(path.read_text(), filename=str(path))
 print('Python syntax: OK')
 PY
+python3 scripts/harness-check.py
 git diff --check
