@@ -63,7 +63,7 @@ Obsidian 연동 시 `$sync-env mac-rescue`의 대상은 `projects/tools/mac-resc
 ```sh
 mkdir -p ~/Desktop/repositories/tools
 cd ~/Desktop/repositories/tools
-git clone https://github.com/Orchemi/mac-rescue-public.git mac-rescue
+git clone https://github.com/Orchemi/mac-rescue.git mac-rescue
 cd mac-rescue
 # 비공개 Obsidian env.md에서 .env.local을 복원한 뒤 설치합니다.
 python3 scripts/install-rescue.py

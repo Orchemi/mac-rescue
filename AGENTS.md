@@ -7,7 +7,7 @@ macOS 전용 개인 도구. 사용자 작업 프로세스를 테스트 대상으
 ## 개발과 Git 컨벤션
 
 - 기본 브랜치: main. 신규 빈 저장소의 최초 커밋으로 초기화하고 이후 기능은 작업 브랜치/PR 사용.
-- GitHub 계정: Orchemi. 공개 origin: https://github.com/Orchemi/mac-rescue-public.git.
+- GitHub 계정: Orchemi. 공개 origin: https://github.com/Orchemi/mac-rescue.git.
 - 커밋: 한국어 conventional commits, 이슈 번호 선택 사항.
 - 검증: 저장소 루트에서 `bash scripts/verify.sh`; 실제 앱 빌드 `python3 scripts/install-rescue.py`.
 - 버전: VERSION의 SemVer, CHANGELOG.md, v 접두 Git 태그. GitHub Release 게시와 공증은 별도 요청.
