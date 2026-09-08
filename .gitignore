@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.pyc
+.build/
+*.app/
+*.dSYM/
+*.jsonl
+
+# Private configuration; only masked examples are version controlled.
+.env
+.env.*
+!.env.local.example
+!.env.*.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*

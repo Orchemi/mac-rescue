@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Rescue · Mac 상태 점검</title><link rel="icon" href="/icon.svg"><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<a href="#main" class="skip">본문으로 이동</a>
+<aside class="sidebar">
+  <a class="brand" href="/"><img src="/icon.svg" width="34" height="34" alt=""><span>Rescue<small>MAC WORKSPACE MONITOR</small></span></a>
+  <div class="side-label">이 Mac</div>
+  <nav aria-label="주 메뉴"><button class="nav active" data-view="groups"><span aria-hidden="true">▦</span> 실행 그룹 <span id="nav-count" class="counter">—</span></button><button class="nav" data-view="processes"><span aria-hidden="true">☷</span> 전체 프로세스</button><button class="nav" data-view="guide"><span aria-hidden="true">⌘</span> 실행과 복구</button></nav>
+  <div class="side-bottom"><div class="local-status"><i></i> 이 기기에서만 실행</div><p>자동으로 프로세스를 종료하지 않습니다.</p><button id="theme" class="quiet">화면 테마: 자동</button></div>
+</aside>
+<main id="main">
+  <header><div class="breadcrumb">내 작업 환경 <span>/</span> <b id="crumb">실행 그룹</b></div><div class="header-actions"><span class="live"><i></i><span id="live-text">연결 중</span></span><button id="refresh" class="button small">새로고침</button></div></header>
+  <section class="intro"><div><div class="eyebrow">WORKSPACE HEALTH</div><h1 id="page-title">가벼운 Mac, 이어지는 작업.</h1><p id="page-description">어떤 작업이 메모리를 쓰는지 확인하고, 끝난 실행만 정리하세요.</p></div><label class="auto-toggle"><input type="checkbox" id="auto" checked> 15초마다 갱신</label></section>
+  <div id="error" class="notice error" role="alert" hidden></div>
+  <section class="metrics" aria-label="Mac 메모리 상태">
+    <article class="metric"><div class="metric-label">메모리 압력 <span aria-hidden="true">◉</span></div><div id="pressure" class="metric-value">—</div><p id="pressure-note">현재 상태를 확인하고 있습니다</p><div class="pressure-track"><i id="pressure-bar"></i></div></article>
+    <article class="metric"><div class="metric-label">실행 그룹 메모리 <span aria-hidden="true">▦</span></div><div id="group-memory" class="metric-value">—<small>GiB</small></div><p id="group-note">개발 서버와 자동화 브라우저 합계</p><div class="mini-note">압축·스왑을 포함한 프로세스 점유량</div></article>
+    <article class="metric"><div class="metric-label">스왑 사용 <span aria-hidden="true">⇄</span></div><div id="swap" class="metric-value">—<small>GiB</small></div><p id="compressed">압축 메모리 —</p><svg id="sparkline" viewBox="0 0 240 24" preserveAspectRatio="none" role="img" aria-label="이 화면에서 측정한 스왑 변화"><path></path></svg></article>
+    <article class="metric"><div class="metric-label">디스크 여유 <span aria-hidden="true">▱</span></div><div id="disk" class="metric-value">—<small>GiB</small></div><p id="ram">물리 메모리 —</p><div class="mini-note" id="sample-time">첫 측정 대기 중</div></article>
+  </section>
+  <section id="workspace" class="workspace">
+    <div class="section-heading"><div><h2 id="list-title">실행 그룹 <span id="group-count">—</span></h2><p id="list-description">같이 시작된 프로세스를 한 묶음으로 보여드립니다.</p></div><span id="result-count" class="muted"></span></div>
+    <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="프로젝트, 프로세스, PID 검색" aria-label="프로젝트, 프로세스, PID 검색"><kbd>/</kbd></label><div class="filters" role="group" aria-label="검토 조건"><button data-filter="all" class="chip active" aria-pressed="true">전체</button><button data-filter="memory" class="chip" aria-pressed="false">메모리 2 GiB+</button><button data-filter="old" class="chip" aria-pressed="false">24시간+</button></div><label class="sort"><span class="sr-only">정렬</span><select id="sort"><option value="memory">메모리 높은 순</option><option value="age">오래된 순</option><option value="name">이름순</option></select></label></div>
+    <div class="table-wrap"><table><thead id="thead"><tr><th>프로젝트 / 실행 그룹</th><th>메모리</th><th>실행 시간</th><th>검토 근거</th><th><span class="sr-only">상세 보기</span></th></tr></thead><tbody id="rows"><tr><td colspan="5" class="loading">실행 중인 작업을 확인하고 있습니다…</td></tr></tbody></table></div>
+    <div class="table-footer"><span><i class="info-dot">i</i> 오래 실행됐다는 이유만으로 종료할 필요는 없습니다.</span><span>G = GiB · 종료 후 확보되는 RAM과 다릅니다</span></div>
+  </section>
+  <section id="guide" class="guide" hidden><div class="guide-card"><span class="eyebrow">ONE SMALL COMMAND</span><h2>이제 <code>rescue</code>만 기억하세요.</h2><p>Mac 터미널과 모바일 Termius에서 같은 명령으로 점검합니다.<br>Mac에서는 Rescue 아이콘으로 네이티브 앱을 열 수 있습니다.</p><div class="command"><code>rescue</code><button data-copy="rescue">복사</button></div><dl><dt><code>rescue gui --web</code></dt><dd>이 웹 화면 열기</dd><dt><code>rescue watch</code></dt><dd>터미널에서 메모리 변화 관찰</dd><dt><code>rescue remote-check</code></dt><dd>Tailscale·SSH 연결 준비 확인</dd><dt><code>rescue gui --stop</code></dt><dd>Rescue 모니터만 종료</dd></dl></div><div class="guide-card"><span class="eyebrow">RECOVER & REINSTALL</span><h2>Orca가 멈춰도, 연결은 따로.</h2><p>모바일 Tailscale → Termius → 내 Mac에 접속한 뒤 <code>rescue</code>를 실행하세요. 메모리가 큰 작업을 확인하고, 끝난 개발 그룹부터 정리하면 됩니다.</p><h3>새 Mac / 포맷 후 복원</h3><p>mac-rescue 저장소를 복원한 다음 저장소 폴더에서 아래 명령을 실행합니다. CLI와 앱 아이콘이 함께 설치됩니다. SSH와 Tailscale 연결은 새 Mac에서 다시 설정해야 합니다.</p><div class="command"><code>python3 scripts/install-rescue.py</code><button data-copy="python3 scripts/install-rescue.py">복사</button></div><p class="muted">소스의 원격 보관 여부는 Git 커밋·푸시 상태에 달려 있습니다. 이 화면이 백업을 대신하지 않습니다.</p></div></section>
+  <footer class="page-footer"><span>Rescue <b>·</b> 로컬에서 확인하고, 직접 선택하세요.</span><span id="own-memory"></span></footer>
+</main>
+<dialog id="detail" class="detail" aria-labelledby="detail-title"><div class="drawer-head"><span class="eyebrow">EXECUTION DETAILS</span><button class="icon-button close-detail" aria-label="상세 닫기">×</button></div><div id="detail-body"></div></dialog>
+<dialog id="confirm" class="confirm" aria-labelledby="confirm-title"><div class="confirm-head"><div class="danger-icon">!</div><button id="cancel-x" class="icon-button" aria-label="종료 확인 닫기">×</button></div><h2 id="confirm-title">선택한 실행을 종료할까요?</h2><p id="confirm-description"></p><div id="plan-summary"></div><div class="plan-list"><table><thead><tr><th>PID</th><th>프로세스</th><th>메모리</th></tr></thead><tbody id="plan-rows"></tbody></table></div><p class="impact" id="impact"></p><label class="confirm-label" for="confirm-input">확인 문구 <strong id="phrase"></strong>를 입력하세요.</label><input id="confirm-input" class="confirm-input" autocomplete="off" spellcheck="false"><p class="muted expiry">미리보기는 60초 동안 유효합니다.</p><div id="confirm-error" class="notice error" role="alert" hidden></div><div class="modal-actions"><button id="cancel" class="button">계속 실행하기</button><button id="execute" class="button danger" disabled>실행 종료</button></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body></html>
