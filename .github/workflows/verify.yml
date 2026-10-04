@@ -12,4 +12,4 @@ jobs:
           python-version: '3.12'
       - run: bash scripts/verify.sh
       - name: Build native app
-        run: python3 scripts/install-rescue.py
+        run: python3 scripts/build-check.py
